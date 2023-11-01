@@ -27,7 +27,7 @@ void Display(int iRows,int iCol)
            }
            else
            {
-                printf("$\t");
+                printf(" \t");
            }
            
             
