@@ -19,15 +19,15 @@ void Display(int iRows,int iCol)
         {
            if(i==j)
            {
-            printf("#\t",j);
+            printf("o\t",j);
            }
            else if (i>j)
            {
-             printf(" \t");
+             printf("*\t");
            }
            else
            {
-                printf(" \t");
+                printf("*\t");
            }
            
             
