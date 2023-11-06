@@ -2,13 +2,13 @@
 
 int strlnX(char str[])
 {
-    int length = 0;
+    int iCnt = 0;
     while(*str != '\0')
     {
-        length++;
+        iCnt++;
         str++;
     }
-     return length;
+     return iCnt;
 }
 
 int main()
@@ -21,7 +21,7 @@ int main()
     scanf("%[^'\n']s",&Arr);
 
     iRet = strlnX(Arr);
-    printf("String  length is ==>> %d\n",iRet);
+    printf("length of String is ==>> %d\n",iRet);
 
     return 0;
 }
