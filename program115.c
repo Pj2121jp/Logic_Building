@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 
-int CheckChar(char cValue)
+int ReturnOpposite(char cValue)
 {
     if (cValue>='A' && cValue<='Z')
     {
@@ -21,16 +21,16 @@ int main()
     printf("Enter the char : ");
     scanf("%c",&ch);
 
-   bRet = CheckChar(ch);
+   bRet = ReturnOpposite(ch);
 
    if (bRet == true)
    {
-     printf("%c is capital",ch);
+     printf("Convert Small is : %c ",ch+32);
 
    }
    else
    {
-    printf("%c is small",ch);
+    printf("Convert Capital is : %c",ch-32);
 
    }
 
