@@ -7,11 +7,11 @@ int CountVowels(char str[])
     {
         if (*str=='A' || *str=='E' || *str=='I' || *str=='O' || *str=='U' || *str=='a' || *str=='e' || *str=='i' || *str=='o' || *str=='u')
         {
-            iCnt++;
+            *str = '_';
         }
         str++;
     }
-     return iCnt;
+    
 }
 
 int main()

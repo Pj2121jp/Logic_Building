@@ -5,13 +5,12 @@ void Replace(char str[])
     int iCnt = 0;
     while(*str != '\0')
     {
-        if (*str=='a')
+        if (*str=='A' || *str=='E' || *str=='I' || *str=='O' || *str=='U' || *str=='a' || *str=='e' || *str=='i' || *str=='o' || *str=='u')
         {
-            *str = '@';
+           *str='_';
         }
         str++;
     }
-    
 }
 
 int main()
@@ -24,9 +23,8 @@ int main()
     scanf("%[^'\n']s",&Arr);
 
 
-     Replace( Arr );
-   
-    printf("Update string is : %s \n",Arr);
+    Replace( Arr );
+    printf("change vowels is ==>> %s\n",Arr);
 
     return 0;
 }
