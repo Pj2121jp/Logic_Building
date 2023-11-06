@@ -10,9 +10,5 @@ int main()
 
     printf("Enterd string is : %s",Arr);
 
-
-
-
-
     return 0;
 }
