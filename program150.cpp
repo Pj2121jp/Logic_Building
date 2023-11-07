@@ -24,7 +24,7 @@ class String
             }
             void Accept()
             {
-                cout<<"Enter the String :  "<<ends; 
+                cout<<"Enter the String ==>>  "<<ends; 
 
                 cin.getline(str,iSize);
 
@@ -33,10 +33,24 @@ class String
             }
             void Dispaly()
             {
-                cout<<"String is :  "<<str<<endl;
+                cout<<"String is ==>>  "<<str<<endl;
             }
 
-            //Logic
+            int CountCapital()
+            {
+                int iCnt =0;
+                char *temp = str;
+
+                while(*temp != '\0')
+                {
+                    if((*temp >= 'A')&&(*temp <= 'Z'))
+                    {
+                          iCnt++;
+                    }
+                  temp++;
+                }
+                return iCnt;
+            }
    
 };
 
@@ -44,13 +58,20 @@ int main()
 {
    
     String *sobj1 = new String(30);
-    String *sobj2 = new String();
+    int iRet = 0;
+    
 
     sobj1->Accept();
     sobj1->Dispaly();
 
-    delete sobj1;
-    delete sobj2;
+    iRet = sobj1->CountCapital();
+
+    cout<<"Capital letter count is ==>>  "<<iRet<<endl;
+
+   sobj1->Dispaly();    // Handeld problm line no 42
+
+   delete sobj1;
+   
     
     return 0;
 }
