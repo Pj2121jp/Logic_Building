@@ -68,7 +68,7 @@ int main()
 
     cout<<"Capital letter count is ==>>  "<<iRet<<endl;
 
-   sobj1->Dispaly();    // Handeld problm line no 42
+   sobj1->Dispaly();    // Handald problm line no 42
 
    delete sobj1;
    
