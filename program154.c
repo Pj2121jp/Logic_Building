@@ -1,9 +1,8 @@
-
-
 #include<stdio.h>
 #include<stdlib.h>
 
-//Structure Declaratin
+//Structure Declaration
+
 struct Node
 {
     int data;                     // 4 Byte
@@ -17,7 +16,7 @@ typedef struct node ** PPNODE;
 
 int main()
 {
-    struct node *First = NULL; 
+    PNODE First = NULL; 
 
     return 0;
 }
