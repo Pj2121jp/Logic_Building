@@ -38,19 +38,25 @@ void InsertFirst(PPNODE Head, int No)
 }
 void Display(PNODE Head)
 {
-    printf("Element of Link List are : \n");
+    int iCnt = 0;
+    printf("Element of Link List are \n==>>>");
     while(Head != NULL)
     {
-        printf("| %d | -> ", Head->data);
+        printf("|%d| --> ", Head->data);
         Head = Head -> next;
+        iCnt++;
     }
     printf("NULL \n");
+
+    printf("Count is ==>>> [ %d ]",iCnt);
 }
 
 int main()
 {
     PNODE First = NULL; 
 
+    InsertFirst(&First, 111);
+    InsertFirst(&First, 101);
     InsertFirst(&First, 51);
     InsertFirst(&First, 21);
     InsertFirst(&First, 11);
