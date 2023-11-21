@@ -55,6 +55,42 @@ void InsertLast(PPNODE Head, int No)
 
 }
 
+void DeleteFirst(PPNODE Head)
+{
+    PNODE Temp  =*Head;
+    if(*Head==NULL)                     //Case 1
+    {
+        return;
+    }
+    else if ((*Head) -> next == NULL)   //Case 1
+    {
+        free(*Head);
+        *Head = NULL;
+    }
+    else                                //Case 3
+    {
+        *Head = (*Head) -> next;
+        free(Temp);
+    }
+}
+
+void DeleteLast(PPNODE Head)
+{
+    if(*Head==NULL)                     //Case 1
+    {
+        return;
+    }
+    else if ((*Head) -> next == NULL)   //Case 1
+    {
+        free(*Head);
+        *Head = NULL;
+    }
+    else                                //Case 3
+    {
+
+    }   
+}
+
 void Display(PNODE Head)
 {
     printf("Contents of Linked List : \n");
@@ -102,6 +138,12 @@ int main()
     Display(First);
     iRet = Count(First);
     printf("Number of nodes are : %d\n",iRet);    
+
+    DeleteFirst(&First);
+
+    Display(First);
+    iRet = Count(First);
+    printf("Number of nodes are : %d\n",iRet);
 
     return 0;
 }
