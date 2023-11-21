@@ -172,9 +172,12 @@ void InsertAtPos(PPNODE Head, int No, int iPos)
 
 }
 
-void DeleteAtPos(PPNODE Head, int No, int iPos)
+void DeleteAtPos(PPNODE Head,int iPos)
 {
     int Size = Count(*Head);
+    int i = 0;
+    PNODE Temp = *Head;
+    PNODE targatednode = NULL;
 
     //Case 1 : Invalide position                    (Ex : 11/-2/8)
     if((iPos<1) || (iPos>Size))
@@ -201,6 +204,14 @@ void DeleteAtPos(PPNODE Head, int No, int iPos)
 
     else
     {
+        for(i=1;i<iPos-1;i++)
+        {
+            Temp=Temp->next;
+        }
+        targatednode = Temp->next;
+
+        Temp->next=Temp->next->next;
+        free(targatednode);
 
     }
 
@@ -220,6 +231,12 @@ int main()
     InsertFirst(&First, 11);
 
     InsertAtPos(&First,105,5);
+
+    Display(First);
+    iRet = Count(First);
+    printf("Number of nodes are : %d\n",iRet);
+
+     DeleteAtPos(&First,5);
 
     Display(First);
     iRet = Count(First);

@@ -127,6 +127,7 @@ int Count(PNODE Head)
 void InsertAtPos(PPNODE Head, int No, int iPos)
 {
     int Size = Count(*Head);
+    PNODE newn = NULL;
 
     //Case 1 : Invalide position                    (Ex : 11/-2/8)
     if((iPos<1) || (iPos>Size+1))
