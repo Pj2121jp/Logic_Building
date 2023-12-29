@@ -1,258 +1,118 @@
-/*
-    ::  Doubly Linked List :: 
-            Insertion
-                InsertFirst
-                InsertLast
-                InsertAtPosition
-            Deletion
-                DeleteFirst
-                DeleteLast
-                DeleteAtPosition
-            Display
-            Count
-    :::::::::::::::::::::::::
-*/
-
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node 
+typedef struct node
 {
     int data;
-    struct node * next;
-    struct node * prev ; // #
-};
+    struct node *next;
+}NODE, *PNODE, **PPNODE;
 
-typedef struct node NODE;
-typedef struct node * PNODE;
-typedef struct node ** PPNODE;
-
-void InsertFirst(PPNODE Head, int no)
+void InsertFirst(PPNODE Head, PPNODE Tail, int no)
 {
     PNODE newn = NULL;
 
     newn = (PNODE)malloc(sizeof(NODE));
-
-    newn->prev = NULL; // #
     newn->data = no;
     newn->next = NULL;
 
-    if(*Head==NULL) // DLL is empty
+    if((*Head == NULL) && (*Tail == NULL))  // LL is empty
     {
         *Head = newn;
-    } 
-    else
+        *Tail = newn;       // #
+     }
+    else    // LL contains atleast 1 node
     {
-       newn->next = *Head; 
-       (*Head)->prev = newn; // # 
-       *Head = newn;
+        newn->next = *Head;
+        *Head = newn;
     }
+    (*Tail)->next = *Head;      // #
 }
 
-void InsertLast(PPNODE Head, int no)
+void InsertLast(PPNODE Head, PPNODE Tail, int no)
 {
     PNODE newn = NULL;
 
     newn = (PNODE)malloc(sizeof(NODE));
-
-    newn->prev = NULL; // #
     newn->data = no;
     newn->next = NULL;
 
-    PNODE temp = *Head;
-    if(*Head==NULL) // DLL is empty
+    if((*Head == NULL) && (*Tail == NULL))  // LL is empty
     {
         *Head = newn;
-    } 
-    else
+        *Tail = newn;
+        (*Tail)->next = *Head;
+     }
+    else    // LL contains atleast 1 node
     {
-       while((temp)->next != NULL)
-       {
-            temp = (temp)->next;
-       }
-
-      newn->prev = temp;
-      temp->next = newn;
+        (*Tail)->next = newn;
+        *Tail = newn;
+        (*Tail)->next = *Head;
     }
 }
 
-void DeleteFirst(PPNODE Head)
-{
-    if(*Head==NULL)
-    {
-        return;
-    }
-    else if(((*Head)->next == NULL) && ((*Head)->prev == NULL))// single node
-    {
-        free(*Head);
-        *Head = NULL;
-    } 
-    else
-    {
-        *Head = (*Head)->next;
-        free((*Head)->prev);
-        (*Head)->prev = NULL;
-        
-    }
+void InsertAtPos(PPNODE Head, PPNODE Tail, int no, int ipos)
+{}
+void DeleteFirst(PPNODE Head, PPNODE Tail)
+{}
 
-}
+void DeleteLast(PPNODE Head, PPNODE Tail)
+{}
 
-void DeleteLast(PPNODE Head)
+void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)
+{}
+
+void Display(PNODE Head, PNODE Tail)
 {
-     if(*Head==NULL)
+    printf("Elements of Linked List are : \n");
+
+    if((Head != NULL) && (Tail != NULL))
     {
-        return;
-    }
-    else if(((*Head)->next == NULL) && ((*Head)->prev == NULL))// single node
-    {
-        free(*Head);
-        *Head = NULL;
-    } 
-    else
-    {
-        PNODE temp = *Head;
-        while(temp->next->next != NULL)
+        do
         {
-            temp = temp->next;
-        }
+            printf("| %d | -> ",Head->data);
+            Head = Head -> next;
+        }while(Head != Tail->next);
 
-        free(temp->next);
-        temp->next = NULL;
+        printf("Address of Fisrt node\n");
     }
 }
 
-void Display(PNODE Head)
-{
-    printf("Contents of LinkedList are : \n");
-
-    printf("NULL <==>");
-
-    while(Head!=NULL)
-    {
-
-        printf("|%d| <==> ",Head->data);
-        Head = Head->next;
-    }
-    printf("NULL \n");
-    
-}
-
-int Count(PNODE Head)
+int Count(PNODE Head, PNODE Tail)
 {
     int iCnt = 0;
-    while(Head!=NULL)
-    {
-        iCnt++;
-        Head = Head->next;
-    }
-    return iCnt;
-}
 
-void InsertAtPos(PPNODE Head, int no, int iPos)
-{
-    int iSize = 0, i = 0;
-    iSize = Count(*Head);
-    PNODE newn = NULL;
-    PNODE temp = *Head;
-
-    if((iPos<1)||(iPos>iSize+1))
+    if((Head != NULL) && (Tail != NULL))
     {
-        printf("Invalid Position\n");
-        return;
-    }
-
-    if(iPos==1)
-    {
-        InsertFirst(Head,no);
-    }
-    else if(iPos== iSize+1)
-    {
-        InsertLast(Head,no);
-    }
-    else
-    {
-        temp = *Head;
-        newn = (PNODE)malloc(sizeof(NODE));
-
-        newn->prev = NULL; 
-        newn->data = no;
-        newn->next = NULL; // # 
-
-        for(i = 1 ; i<iPos-1;i++)
+        do
         {
-            temp = temp->next;
-        }
-
-        newn->next = temp->next;
-        temp->next->prev = newn;
-        temp->next = newn;
-        newn->prev = temp;
+            iCnt++;
+            Head = Head -> next;
+        }while(Head != Tail->next);
     }
-
-}
-
-void DeleteAtPos(PPNODE Head, int iPos)
-{
-    int iSize = 0;
-    iSize = Count(*Head);
-
-    if((iPos<1)||(iPos>iSize))
-    {
-        printf("Invalid Position\n");
-        return;
-    }
-    if(iPos==1)
-    {
-        DeleteFirst(Head);
-    }
-    else if(iPos== iSize)
-    {
-        DeleteLast(Head);
-    }
-    else
-    {
-        
-    }
+    return iCnt;    
 }
 
 int main()
 {
     PNODE First = NULL;
+    PNODE Last = NULL;      // #
     int iRet = 0;
-    InsertFirst(&First, 51);
-    InsertFirst(&First, 21);
-    InsertFirst(&First, 11);
 
-    Display(First);
-    iRet = Count(First);
-    printf("The count is : %d\n",iRet);
+    InsertFirst(&First, &Last, 51);
+    InsertFirst(&First, &Last, 21);
+    InsertFirst(&First, &Last, 11);
 
-    InsertLast(&First,101);
-    InsertLast(&First,111);
-    InsertLast(&First,121);
+    Display(First,Last);
+    iRet = Count(First,Last);
+    printf("Number of elements are : %d\n",iRet);
     
-    Display(First);
-    iRet = Count(First);
-    printf("The count is : %d\n",iRet);
+    InsertLast(&First,&Last,101);
+    InsertLast(&First,&Last,111);
+    InsertLast(&First,&Last,121);
 
-    /*
-    DeleteFirst(&First);
-    Display(First);
-    iRet = Count(First);
-    printf("The count is : %d\n",iRet);
-
-    DeleteLast(&First);
-    Display(First);
-    iRet = Count(First);
-    printf("The count is : %d\n",iRet);
-    */
-
-    InsertAtPos(&First,105,5);
-    Display(First);
-    iRet = Count(First);
-    printf("The count is : %d\n",iRet);
-
-
-
+    Display(First,Last);
+    iRet = Count(First,Last);
+    printf("Number of elements are : %d\n",iRet);
+    
     return 0;
 }

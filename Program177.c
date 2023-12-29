@@ -18,14 +18,15 @@ void InsertFirst(PPNODE Head, PPNODE Tail, int no)
     if((*Head == NULL) && (*Tail == NULL))  // LL is empty
     {
         *Head = newn;
-        *Tail = newn;       // #
+        *Tail = newn;
+        (*Tail)->next = *Head;
      }
     else    // LL contains atleast 1 node
     {
         newn->next = *Head;
         *Head = newn;
+        (*Tail)->next = *Head;
     }
-    (*Tail)->next = *Head;      // #
 }
 
 void InsertLast(PPNODE Head, PPNODE Tail, int no)
@@ -44,67 +45,28 @@ void InsertLast(PPNODE Head, PPNODE Tail, int no)
      }
     else    // LL contains atleast 1 node
     {
-        (*Tail)->next = newn;
-        *Tail = newn;
-        (*Tail)->next = *Head;
+
     }
 }
-
 void InsertAtPos(PPNODE Head, PPNODE Tail, int no, int ipos)
 {}
 void DeleteFirst(PPNODE Head, PPNODE Tail)
 {}
-
 void DeleteLast(PPNODE Head, PPNODE Tail)
 {}
-
 void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)
 {}
-
 void Display(PNODE Head, PNODE Tail)
-{
-    printf("Elements of Linked List are : \n");
-
-    if((Head != NULL) && (Tail != NULL))
-    {
-        do
-        {
-            printf("| %d | -> ",Head->data);
-            Head = Head -> next;
-        }while(Head != Tail->next);
-
-        printf("Address of Fisrt node\n");
-    }
-}
-
+{}
 int Count(PNODE Head, PNODE Tail)
 {
-    int iCnt = 0;
-
-    if((Head != NULL) && (Tail != NULL))
-    {
-        do
-        {
-            iCnt++;
-            Head = Head -> next;
-        }while(Head != Tail->next);
-    }
-    return iCnt;    
+    return 0;
 }
 
 int main()
 {
     PNODE First = NULL;
     PNODE Last = NULL;      // #
-    int iRet = 0;
 
-    InsertFirst(&First, &Last, 51);
-    InsertFirst(&First, &Last, 21);
-    InsertFirst(&First, &Last, 11);
-
-    Display(First,Last);
-    iRet = Count(First,Last);
-    printf("Number of elements are : %d\n",iRet);
-    
     return 0;
 }

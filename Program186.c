@@ -50,9 +50,6 @@ void InsertLast(PPNODE Head, PPNODE Tail, int no)
     }
 }
 
-void InsertAtPos(PPNODE Head, PPNODE Tail, int no, int ipos)
-{}
-
 void DeleteFirst(PPNODE Head, PPNODE Tail)
 {
     if(*Head == NULL && *Tail == NULL)  // Case 1
@@ -75,6 +72,8 @@ void DeleteFirst(PPNODE Head, PPNODE Tail)
 
 void DeleteLast(PPNODE Head, PPNODE Tail)
 {
+    PNODE temp = *Head;
+
     if(*Head == NULL && *Tail == NULL)  // Case 1
     {
         return;
@@ -87,12 +86,15 @@ void DeleteLast(PPNODE Head, PPNODE Tail)
     }
     else    // Case 3
     {
-
+        while(temp->next != *Tail)
+        {
+	        temp = temp->next;
+        }
+        free(*Tail);
+        *Tail = temp;
+        (*Tail)->next = *Head;
     }
 }
-
-void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)
-{}
 
 void Display(PNODE Head, PNODE Tail)
 {
@@ -125,6 +127,79 @@ int Count(PNODE Head, PNODE Tail)
     return iCnt;    
 }
 
+void InsertAtPos(PPNODE Head, PPNODE Tail, int no, int ipos)
+{
+    int size = 0, i = 0;
+    size = Count(*Head, *Tail);
+    PNODE newn = NULL;
+
+    PNODE temp = *Head;
+
+    if((ipos < 1) || (ipos > size+1))
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(ipos == 1)
+    {
+       InsertFirst( Head, Tail, no); 
+    }
+    else if(ipos == size+1)
+    {
+        InsertLast(Head, Tail, no);
+    }
+    else
+    {
+        newn = (PNODE)malloc(sizeof(NODE));
+        newn->data = no;
+        newn->next = NULL;
+
+        for(i =1; i< ipos-1; i++)
+        {
+            temp = temp ->next;
+        }
+
+        newn->next = temp->next;
+        temp->next = newn;
+    }
+}
+
+void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)
+{
+    int size = 0, i = 0;
+    size = Count(*Head, *Tail);
+
+    PNODE temp = *Head;
+    PNODE targatednode = NULL;
+
+    if((ipos < 1) || (ipos > size))
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(ipos == 1)
+    {
+       DeleteFirst( Head, Tail); 
+    }
+    else if(ipos == size)
+    {
+        DeleteLast(Head, Tail);
+    }
+    else
+    {
+        for(i =1; i< ipos-1; i++)
+        {
+            temp = temp ->next;
+        }
+
+        targatednode = temp->next;
+        temp->next = temp->next->next;
+        free(targatednode);
+    }
+}
+
 int main()
 {
     PNODE First = NULL;
@@ -147,8 +222,24 @@ int main()
     iRet = Count(First,Last);
     printf("Number of elements are : %d\n",iRet);
     
+    InsertAtPos(&First,&Last,105,5);
+    Display(First,Last);
+    iRet = Count(First,Last);
+    printf("Number of elements are : %d\n",iRet);
+    
+    DeleteAtPos(&First,&Last,5);
+    Display(First,Last);
+    iRet = Count(First,Last);
+    printf("Number of elements are : %d\n",iRet);
+    
     DeleteFirst(&First,&Last);
         
+    Display(First,Last);
+    iRet = Count(First,Last);
+    printf("Number of elements are : %d\n",iRet);
+    
+    DeleteLast(&First,&Last);
+
     Display(First,Last);
     iRet = Count(First,Last);
     printf("Number of elements are : %d\n",iRet);
